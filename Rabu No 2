@@ -1,0 +1,419 @@
+import turtle
+
+# Fungsi untuk menggambar persegi panjang
+def gambar_persegi_panjang(width, height, color):
+    turtle.color(color)
+    turtle.begin_fill()
+    for _ in range(2):
+        turtle.forward(width)
+        turtle.left(90)
+        turtle.forward(height)
+        turtle.left(90)
+    turtle.end_fill()
+
+# Fungsi untuk menggambar segitiga
+def gambar_segitiga(size, color):
+    turtle.color(color)
+    turtle.begin_fill()
+    for _ in range(3):
+        turtle.forward(size)
+        turtle.left(120)
+    turtle.end_fill()
+
+# Fungsi untuk menggambar trapezium
+def gambar_trapezium(base1, base2, height, color):
+    turtle.color(color)
+    turtle.begin_fill()
+    turtle.forward(base1)
+    turtle.left(120)
+    turtle.forward(height)
+    turtle.left(60)
+    turtle.forward(base2)
+    turtle.left(60)
+    turtle.forward(height)
+    turtle.left(120)
+    turtle.end_fill()
+
+# Fungsi untuk menggambar jajar genjang
+def gambar_jajar_genjang(base, side, angle, color):
+    turtle.color(color)
+    turtle.begin_fill()
+    for _ in range(2):
+        turtle.forward(base)
+        turtle.left(180 - angle)
+        turtle.forward(side)
+        turtle.left(angle)
+    turtle.end_fill()
+
+# Fungsi untuk menggambar belah ketupat
+def gambar_belah_ketupat(diagonal1, diagonal2, color):
+    turtle.color(color)
+    turtle.begin_fill()
+    for _ in range(2):
+        turtle.forward(diagonal1 / 2)
+        turtle.left(120)
+        turtle.forward(diagonal2 / 2)
+        turtle.left(60)
+    turtle.end_fill()
+
+# Fungsi untuk menggambar Bendera Indonesia
+def gambar_bendera_indonesia(width, height):
+    # Bagian merah
+    turtle.color("red")
+    turtle.begin_fill()
+    for _ in range(2):
+        turtle.forward(width)
+        turtle.left(90)
+        turtle.forward(height / 2)
+        turtle.left(90)
+    turtle.end_fill()
+    turtle.left(90)
+    turtle.forward(height / 2)
+    turtle.right(90)
+    # Bagian putih
+    turtle.color("white")
+    turtle.begin_fill()
+    for _ in range(2):
+        turtle.forward(width)
+        turtle.left(90)
+        turtle.forward(height / 2)
+        turtle.left(90)
+    turtle.end_fill()
+
+# Mengatur layar
+turtle.speed(3)
+
+# Gambar persegi panjang
+turtle.penup()
+turtle.goto(-300, 200)
+turtle.pendown()
+gambar_persegi_panjang(200, 100, "red")
+
+# Gambar segitiga
+turtle.penup()
+turtle.goto(50, 200)
+turtle.pendown()
+gambar_segitiga(100, "yellow")
+
+# Gambar trapezium
+turtle.penup()
+turtle.goto(-200, 50)
+turtle.pendown()
+gambar_trapezium(150, 100, 75, "green")
+
+# Gambar jajar genjang
+turtle.penup()
+turtle.goto(200, 50)
+turtle.pendown()
+gambar_jajar_genjang(120, 80, 60, "blue")
+
+# Gambar belah ketupat
+turtle.penup()
+turtle.goto(-100, -150)
+turtle.pendown()
+gambar_belah_ketupat(120, 80, "purple")
+
+# Gambar Bendera Indonesia
+turtle.penup()
+turtle.goto(100, -150)
+turtle.pendown()
+gambar_bendera_indonesia(200, 100)
+
+# Selesai
+turtle.done()
+
+
+
+# Python program to draw shapes based on user input using Turtle Programming
+
+import turtle
+import time
+import random
+
+print("This program draws shapes based on the number you enter in a uniform pattern.")
+num_str = input("Enter the side number of the shape you want to draw: ")
+
+if num_str.isdigit():
+    squares = int(num_str)
+    angle = 180 - 180 * (squares - 2) / squares
+
+    turtle.up()
+    x = -100
+    y = 0
+    turtle.setpos(x, y)
+
+    numshapes = 8
+
+    for x in range(numshapes):
+        turtle.color(random.random(), random.random(), random.random())
+        x = x * 5
+        y = y * 5
+        turtle.forward(x)
+        turtle.left(y)
+
+        for i in range(squares):
+            turtle.begin_fill()
+            turtle.down()
+            turtle.forward(40)
+            turtle.left(angle)
+            print(turtle.pos())
+            turtle.forward(40)
+            turtle.up()
+            turtle.end_fill()
+        time.sleep(1)
+
+    turtle.bye()
+
+
+import turtle as t
+# Setup turtle
+t.speed(0)
+t.setup(1000, 500)  # Mengatur ukuran layar yang lebih kecil
+t.bgcolor("black")
+t.width(3)
+# Fungsi untuk menggambar persegi panjang dengan warna tertentu
+def draw_rectangle(color, width, height, position):
+    t.penup()
+    t.goto(position)
+    t.pendown()
+    t.color(color)
+    t.begin_fill()
+    for _ in range(2):  # Membuat persegi panjang
+        t.forward(width)
+        t.left(90)
+        t.forward(height)
+        t.left(90)
+    t.end_fill()
+# Menggambar bendera Indonesia
+# Bagian Merah (di atas)
+draw_rectangle("red", 1000, 250, (-500, 125))
+# Bagian Putih (di bawah)
+draw_rectangle("white", 1000, 250, (-500, -125))
+# Sembunyikan turtle setelah menggambar
+t.hideturtle()
+# Selesai menggambar
+t.done()
+
+
+
+import turtle
+# Fungsi untuk menggambar pohon Fibonacci
+def fibonacci_tree(t, branch_len, angle, level):
+    if level == 0:
+        return
+    else:
+        # Gambar cabang pertama
+        t.forward(branch_len)
+        t.left(angle)
+        fibonacci_tree(t, branch_len * 0.7, angle, level - 1)  # Rekursi cabang kiri
+        
+        # Kembali ke posisi awal
+        t.right(2 * angle)
+        fibonacci_tree(t, branch_len * 0.7, angle, level - 1)  # Rekursi cabang kanan
+        
+        # Kembali ke posisi semula
+        t.left(angle)
+        t.backward(branch_len)
+# Setup turtle
+turtle.speed(0)
+turtle.left(90)  # Arahkan turtle ke atas
+turtle.color("brown")  # Warna batang
+turtle.bgcolor("white")  # Latar belakang putih
+turtle.penup()
+turtle.setpos(0, -200)  # Posisi awal di bawah
+turtle.pendown()
+fibonacci_tree(turtle, 100, 30, 7)  # Gambar pohon dengan panjang cabang 100, sudut 30 derajat, dan level 7
+# Menyelesaikan program
+turtle.done()
+
+
+
+import turtle
+
+#initialize method
+bat = turtle.Turtle()
+
+#size of pointer and pen
+bat.turtlesize(1, 1, 1)
+bat.pensize(3)
+
+#screen info
+wn = turtle.Screen()
+wn.bgcolor("white")
+wn.title("BATMAN")
+
+#colour
+bat.color("yellow", "black")
+
+
+#begin filling color
+bat.begin_fill()
+
+#turn1
+bat.left(90)   # turn pointer direction to left of 90'
+bat.circle(50, 85) #draw circle of radius = 50 and 85'
+bat.circle(15, 110)
+bat.right(180)
+
+#turn 2
+bat.circle(30, 150)
+bat.right(5)
+bat.forward(10) #draw forward line of 10 units
+
+#turn 3
+bat.right(90)
+bat.circle(-70, 140)
+bat.forward(40)
+bat.right(110)
+
+#turn 4
+bat.circle(100, 30)
+bat.circle(30, 100)
+bat.left(50)
+bat.forward(50)
+bat.right(145)
+
+#turn5
+bat.forward(30)
+bat.left(55)
+bat.forward(10)
+
+#reverse
+
+#turn 5
+bat.forward(10)
+bat.left(55)
+bat.forward(30)
+
+#turn 4
+
+bat.right(145)
+bat.forward(50)
+bat.left(50)
+bat.circle(30, 100)
+bat.circle(100, 30)
+
+#turn 3
+bat.right(90)
+bat.right(20)
+bat.forward(40)
+bat.circle(-70, 140)
+
+#turn 2
+bat.right(90)
+bat.forward(10)
+bat.right(5)
+bat.circle(30, 150)
+
+#turn 1
+bat.left(180)
+bat.circle(15, 110)
+bat.circle(50, 85)
+
+#end color filling
+bat.end_fill()
+
+#end the turtle method
+turtle.done()
+
+
+import turtle as t
+import math
+
+# Setup turtle
+t.speed(0)
+t.bgcolor("white")
+t.title("Logo SMK Prestasi Prima")
+
+# Fungsi menggambar lingkaran berisi
+def draw_circle(color, radius, position):
+    t.penup()
+    t.goto(position)
+    t.pendown()
+    t.color(color)
+    t.begin_fill()
+    t.circle(radius)
+    t.end_fill()
+
+# Fungsi menggambar persegi panjang
+def draw_rectangle(color, width, height, position, angle=0):
+    t.penup()
+    t.goto(position)
+    t.setheading(angle)  # Mengatur rotasi untuk kemiringan
+    t.pendown()
+    t.color(color)
+    t.begin_fill()
+    for _ in range(2):
+        t.forward(width)
+        t.left(90)
+        t.forward(height)
+        t.left(90)
+    t.end_fill()
+
+# Fungsi menggambar bintang
+def draw_star(color, size, position):
+    t.penup()
+    t.goto(position)
+    t.setheading(90)  # Mengatur arah awal ke atas
+    t.pendown()
+    t.color(color)
+    t.begin_fill()
+    for _ in range(5):
+        t.forward(size)
+        t.right(144)  # Sudut untuk membentuk bintang
+    t.end_fill()
+
+# Lingkaran hitam luar
+draw_circle("black", 160, (0, -160))
+
+# Lingkaran putih kedua
+draw_circle("white", 140, (0, -140))
+
+# Lingkaran biru paling dalam
+draw_circle("blue", 100, (0, -100))
+
+# ===== Telapak Tangan =====
+draw_rectangle("red", 100, 40, (-50, -80))  # Telapak tangan sejajar tengah
+
+# ===== Jempol =====
+thumb_angle = 30  # Ganti nilai ini untuk mengubah kemiringan jempol
+draw_rectangle("red", 23, 30, (-45, -20), angle=thumb_angle)  # Jempol sejajar dengan tangan
+
+# ===== Telunjuk =====
+draw_rectangle("red", 20, 90, (-35, -20))  # Telunjuk lebih tinggi
+
+# ===== Jari Tengah =====
+draw_rectangle("red", 20, 40, (-11, -20))  # Jari tengah lebih tinggi
+
+# ===== Jari Manis =====
+draw_rectangle("red", 20, 33, (11, -20))  # Jari manis lebih tinggi
+
+# ===== Kelingking =====
+draw_rectangle("red", 20, 33, (33, -20))  # Kelingking lebih pendek dari jari tengah dan manis
+
+# Menambahkan teks "SEKOLAH MENENGAH KEJURUAN" mengikuti kurva lingkaran putih
+text = "MENENGAH  KEJURUAN   AMIRP ISATSERP  SEKOLAH"
+radius = 120  # Radius dari lingkaran putih
+angle_offset = 90 # Sudut mulai dari posisi atas
+
+for i, char in enumerate(text):
+    angle = angle_offset - (i * (360 / len(text)))  # Menghitung sudut untuk setiap huruf
+    x = radius * math.cos(math.radians(angle))  # Menghitung posisi x
+    y = radius * math.sin(math.radians(angle))  # Menghitung posisi y
+    t.penup()
+    t.goto(x, y - 20)  # Menyesuaikan posisi y agar lebih ke tengah
+    t.setheading(angle)  # Mengatur arah teks mengikuti sudut
+    t.pendown()
+    t.write(char, align="center", font=("Arial", 12, "bold"))
+
+# Menambahkan bintang di bawah "SEKOLAH"
+star_position_1 = (-(radius - 10), -30)  # Posisi bintang di bawah "SEKOLAH"
+draw_star("black", 15, star_position_1)
+
+# Menambahkan bintang di bawah "KEJURUAN"
+star_position_2 = (radius - 10, -30)  # Posisi bintang di bawah "KEJURUAN"
+draw_star("black", 15, star_position_2)
+
+# Selesai menggambar
+t.hideturtle()
+t.done()
