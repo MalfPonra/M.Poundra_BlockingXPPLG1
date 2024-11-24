@@ -1,0 +1,190 @@
+import PySimpleGUI as sg
+
+# Define the layout
+layout = [
+    [sg.Text('Harga:', size=(10, 1)), sg.Input(key='-HARGA-', size=(20, 1))],
+    [sg.Text('Kuantitas:', size=(10, 1)), sg.Input(key='-KUANTITAS-', size=(20, 1))],
+    [sg.Button('Hitung Total')],
+    [sg.Text('Total:', size=(10, 1)), sg.Text('Rp.0.00', key='-TOTAL-', size=(20, 1))]
+]
+
+window = sg.Window('Kalkulator Harga', layout)
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED:
+        break
+    if event == 'Hitung Total':
+        try:
+            harga = float(values['-HARGA-'])
+            kuantitas = int(values['-KUANTITAS-'])
+            total = harga * kuantitas
+            window['-TOTAL-'].update(f'Rp.{total:,.2f}')  # Update the total with proper formatting
+        except ValueError:
+            window['-TOTAL-'].update('Input tidak valid')  # Handle input errors
+window.close()
+
+
+
+from tkinter import *
+from tkinter import ttk
+
+# Function to calculate the parking fee
+def calculate_fee():
+    try:
+        # Get the input values
+        waktu_masuk = waktu_masuk_entry.get()
+        waktu_keluar = waktu_keluar_entry.get()
+        hours_parked = float(waktu_keluar) - float(waktu_masuk)
+        rate_per_hour = 5000
+        biaya = hours_parked * rate_per_hour
+        biaya_entry.delete(0, END)  # Clear any previous result
+        biaya_entry.insert(0, str(biaya))  # Insert the calculated fee
+        
+    except ValueError:
+        # If there's an invalid input, show an error
+        biaya_entry.delete(0, END)
+        biaya_entry.insert(0, "Input invalid!")
+root = Tk()
+root.title("Aplikasi Parkir Kelompok 6")
+title_label = Label(root, text="Aplikasi Parkir Kelompok 6", font=("Arial", 16))
+title_label.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
+no_pol_label = Label(root, text="Cari NoPol")
+no_pol_label.grid(row=1, column=0, padx=10, pady=5)
+no_pol_entry = Entry(root)
+no_pol_entry.grid(row=1, column=1, padx=10, pady=5)
+plat_polisi_label = Label(root, text="No Plat Polisi")
+plat_polisi_label.grid(row=2, column=0, padx=10, pady=5)
+plat_polisi_entry = Entry(root)
+plat_polisi_entry.grid(row=2, column=1, padx=10, pady=5)
+waktu_masuk_label = Label(root, text="Waktu Masuk (Jam)")
+waktu_masuk_label.grid(row=3, column=0, padx=10, pady=5)
+waktu_masuk_entry = Entry(root)
+waktu_masuk_entry.grid(row=3, column=1, padx=10, pady=5)
+waktu_keluar_label = Label(root, text="Waktu Keluar (Jam)")
+waktu_keluar_label.grid(row=4, column=0, padx=10, pady=5)
+waktu_keluar_entry = Entry(root)
+waktu_keluar_entry.grid(row=4, column=1, padx=10, pady=5)
+biaya_label = Label(root, text="Biaya")
+biaya_label.grid(row=5, column=0, padx=10, pady=5)
+biaya_entry = Entry(root)
+biaya_entry.grid(row=5, column=1, padx=10, pady=5)
+calculate_button = Button(root, text="Hitung Biaya", command=calculate_fee)
+calculate_button.grid(row=6, column=0, columnspan=2, pady=10)
+root.mainloop()
+
+
+
+import tkinter as tk
+from tkinter import ttk
+from tkinter import messagebox
+
+# Function to save data
+def simpan():
+    nama_lengkap = nama_lengkap_entry.get()
+    tanggal_lahir = tanggal_lahir_entry.get()
+    asal_sekolah = asal_sekolah_entry.get()
+    nisn = nisn_entry.get()
+    nama_ayah = nama_ayah_entry.get()
+    nama_ibu = nama_ibu_entry.get()
+    nomor_telepon = nomor_telepon_entry.get()
+    alamat = alamat_entry.get("1.0", tk.END)
+
+    # Check if all fields are filled
+    if not nama_lengkap or not tanggal_lahir or not asal_sekolah or not nisn or not nama_ayah or not nama_ibu or not nomor_telepon or not alamat:
+        messagebox.showerror("Error", "Semua field harus diisi")
+        return
+
+    # Validate NISN and nomor telepon to be numbers
+    try:
+        int(nisn)
+        int(nomor_telepon)
+    except ValueError:
+        messagebox.showerror("Error", "NISN dan Nomor Telepon harus berupa angka")
+        return
+
+    # Simpan data ke database atau file
+    # For now, we are simulating this with a print statement.
+    # You can implement saving to a database or file here.
+    print("Data siswa berhasil disimpan:")
+    print(f"Nama Lengkap: {nama_lengkap}")
+    print(f"Tanggal Lahir: {tanggal_lahir}")
+    print(f"Asal Sekolah: {asal_sekolah}")
+    print(f"NISN: {nisn}")
+    print(f"Nama Ayah: {nama_ayah}")
+    print(f"Nama Ibu: {nama_ibu}")
+    print(f"Nomor Telepon: {nomor_telepon}")
+    print(f"Alamat: {alamat}")
+
+    messagebox.showinfo("Informasi", "Data siswa berhasil disimpan")
+
+    # Bersihkan field
+    nama_lengkap_entry.delete(0, tk.END)
+    tanggal_lahir_entry.delete(0, tk.END)
+    asal_sekolah_entry.delete(0, tk.END)
+    nisn_entry.delete(0, tk.END)
+    nama_ayah_entry.delete(0, tk.END)
+    nama_ibu_entry.delete(0, tk.END)
+    nomor_telepon_entry.delete(0, tk.END)
+    alamat_entry.delete("1.0", tk.END)
+
+# Function to delete data (simulate this with a message)
+def hapus():
+    # Hapus data dari database atau file
+    # For now, we'll simulate this.
+    print("Data siswa berhasil dihapus")
+    messagebox.showinfo("Informasi", "Data siswa berhasil dihapus")
+
+# Membuat jendela utama
+root = tk.Tk()
+root.title("Data Siswa Baru")
+
+# Label dan Entry for all the fields
+nama_lengkap_label = tk.Label(root, text="Nama Lengkap:")
+nama_lengkap_label.grid(row=0, column=0, padx=10, pady=5)
+nama_lengkap_entry = tk.Entry(root)
+nama_lengkap_entry.grid(row=0, column=1, padx=10, pady=5)
+
+tanggal_lahir_label = tk.Label(root, text="Tanggal Lahir:")
+tanggal_lahir_label.grid(row=1, column=0, padx=10, pady=5)
+tanggal_lahir_entry = tk.Entry(root)
+tanggal_lahir_entry.grid(row=1, column=1, padx=10, pady=5)
+
+asal_sekolah_label = tk.Label(root, text="Asal Sekolah:")
+asal_sekolah_label.grid(row=2, column=0, padx=10, pady=5)
+asal_sekolah_entry = tk.Entry(root)
+asal_sekolah_entry.grid(row=2, column=1, padx=10, pady=5)
+
+nisn_label = tk.Label(root, text="NISN:")
+nisn_label.grid(row=3, column=0, padx=10, pady=5)
+nisn_entry = tk.Entry(root)
+nisn_entry.grid(row=3, column=1, padx=10, pady=5)
+
+nama_ayah_label = tk.Label(root, text="Nama Ayah:")
+nama_ayah_label.grid(row=4, column=0, padx=10, pady=5)
+nama_ayah_entry = tk.Entry(root)
+nama_ayah_entry.grid(row=4, column=1, padx=10, pady=5)
+
+nama_ibu_label = tk.Label(root, text="Nama Ibu:")
+nama_ibu_label.grid(row=5, column=0, padx=10, pady=5)
+nama_ibu_entry = tk.Entry(root)
+nama_ibu_entry.grid(row=5, column=1, padx=10, pady=5)
+
+nomor_telepon_label = tk.Label(root, text="Nomor Telepon:")
+nomor_telepon_label.grid(row=6, column=0, padx=10, pady=5)
+nomor_telepon_entry = tk.Entry(root)
+nomor_telepon_entry.grid(row=6, column=1, padx=10, pady=5)
+
+alamat_label = tk.Label(root, text="Alamat:")
+alamat_label.grid(row=7, column=0, padx=10, pady=5)
+alamat_entry = tk.Text(root, height=4, width=30)
+alamat_entry.grid(row=7, column=1, padx=10, pady=5)
+
+# Buttons for saving and deleting
+simpan_button = tk.Button(root, text="Simpan", command=simpan)
+simpan_button.grid(row=8, column=0, padx=10, pady=10)
+
+hapus_button = tk.Button(root, text="Hapus", command=hapus)
+hapus_button.grid(row=8, column=1, padx=10, pady=10)
+
+# Run the application
+root.mainloop()
