@@ -1,0 +1,249 @@
+import tkinter as tk
+root = tk.Tk()
+label = tk.Label(root, text="Label 1")
+label.pack()
+
+button = tk.Button(root, text="Tombol 1")
+button.pack()
+
+checkbox = tk.Checkbutton(root, text="Centang 1")
+checkbox.pack()
+
+root.mainloop()
+
+
+import tkinter as tk
+
+root = tk.Tk()
+
+# Create labels
+label1 = tk.Label(root, text="Label 1")
+label2 = tk.Label(root, text="Label 2")  # Fixed variable name (was Tabel2)
+label3 = tk.Label(root, text="Label 3")
+
+# Arrange labels using grid layout
+label1.grid(row=0, column=0)
+label2.grid(row=0, column=1)
+label3.grid(row=1, column=0, columnspan=2)
+
+root.mainloop()
+
+
+
+import tkinter as tk
+
+# Create the main window
+root = tk.Tk()
+
+# Create a label and place it at specific coordinates
+label1 = tk.Label(root, text="Label 1")  # Fixed the variable name and syntax
+label1.place(x=10, y=10)
+
+# Create a button and place it with specific size and coordinates
+button1 = tk.Button(root, text="Tombol 1")  # Fixed syntax
+button1.place(x=50, y=50, width=100, height=30)
+
+# Run the main loop
+root.mainloop()
+
+
+import tkinter as tk
+from tkinter import ttk
+from tkinter.messagebox import showinfo
+# Initialize the main window
+window = tk.Tk()
+window.configure(bg="white")  # Set the background color to white
+window.geometry("300x200")  # Set the size of the window
+window.resizable(False, False)  # Make the window not resizable
+window.title("Sapa")  # Set the title of the window
+# Variables to store input
+NAMA_DEPAN = tk.StringVar()  # Create a variable for the first name
+NAMA_BELAKANG = tk.StringVar()  # Create a variable for the last name
+# Function for button click
+def tombol_click():
+    pesan = f"Hello {NAMA_DEPAN.get()} {NAMA_BELAKANG.get()}, Have a nice day!"
+    showinfo(title="Hi", message=pesan)
+# Input frame
+input_frame = ttk.Frame(window)  # Create a frame
+input_frame.pack(padx=10, pady=10, fill="x", expand=True)
+# Label and entry for first name
+nama_depan_label = ttk.Label(input_frame, text="Nama Depan:")  # Create a label
+nama_depan_label.pack(fill="x", expand=True)
+nama_depan_entry = ttk.Entry(input_frame, textvariable=NAMA_DEPAN)  # Create an entry widget
+nama_depan_entry.pack(pady=10, fill="x", expand=True)
+# Label and entry for last name
+nama_belakang_label = ttk.Label(input_frame, text="Nama Belakang:")  # Create a label
+nama_belakang_label.pack(fill="x", expand=True)
+nama_belakang_entry = ttk.Entry(input_frame, textvariable=NAMA_BELAKANG)  # Create an entry widget
+nama_belakang_entry.pack(pady=10, fill="x", expand=True)
+# Button
+tombol = ttk.Button(input_frame, text="Sapa!", command=tombol_click)  # Create a button
+tombol.pack(fill="x", expand=True, padx=10, pady=10)
+# Run the main event loop
+window.mainloop()
+
+
+import tkinter as tk
+from tkinter import ttk
+# Function to calculate the result
+def hitung():
+    try:
+        angka1 = float(angka1_entry.get())  # Get the first number
+        angka2 = float(angka2_entry.get())  # Get the second number
+        operator = operator_combobox.get()  # Get the operator
+
+        if operator == "+":
+            hasil = angka1 + angka2
+        elif operator == "-":
+            hasil = angka1 - angka2
+        elif operator == "*":
+            hasil = angka1 * angka2
+        elif operator == "/":
+            if angka2 != 0:
+                hasil = angka1 / angka2
+            else:
+                hasil = "Error: Division by zero"
+        else:
+            hasil = "Operator tidak valid"
+
+        hasil_label.config(text=f"Hasil: {hasil}")  # Display the result
+    except ValueError:
+        hasil_label.config(text="Error: Masukkan angka yang valid!")
+# Create the main window
+window = tk.Tk()
+window.title("Kalkulator")
+# Frame for input fields
+input_frame = ttk.Frame(window)
+input_frame.pack(padx=10, pady=10)
+# Entry for the first number
+angka1_label = ttk.Label(input_frame, text="Angka 1:")
+angka1_label.grid(row=0, column=0, sticky="W")
+angka1_entry = ttk.Entry(input_frame)
+angka1_entry.grid(row=0, column=1)
+# Entry for the second number
+angka2_label = ttk.Label(input_frame, text="Angka 2:")
+angka2_label.grid(row=1, column=0, sticky="W")
+angka2_entry = ttk.Entry(input_frame)
+angka2_entry.grid(row=1, column=1)
+# Combobox for selecting the operator
+operator_label = ttk.Label(input_frame, text="Operator:")
+operator_label.grid(row=2, column=0, sticky="W")
+operator_combobox = ttk.Combobox(input_frame, values=["+", "-", "*", "/"], state="readonly")
+operator_combobox.grid(row=2, column=1)
+operator_combobox.current(0)  # Set default operator to "+"
+# Button to calculate
+hitung_button = ttk.Button(window, text="Hitung", command=hitung)
+hitung_button.pack(pady=10)
+# Label to display the result
+hasil_label = ttk.Label(window, text="Hasil: ")
+hasil_label.pack()
+# Run the main loop
+window.mainloop()
+
+
+# hello_world.py
+
+import PySimpleGUI as sg
+
+sg.Window(title="Hello World", layout=[[]], margins=(100, 50)).read()
+
+
+import PySimpleGUI as sg
+
+layout = [[sg.Button('Klik Saya')]]
+window = sg.Window('Contoh Program PySimpleGUI', layout)
+
+while True:
+    event, values = window.read()
+    if event == sg.WINDOW_CLOSED:
+        break
+    elif event == 'Klik Saya':
+        print('Tombol diklik')
+
+window.close()
+
+
+
+import PySimpleGUI as sg
+
+sg.theme('BluePurple')
+
+layout = [
+    [sg.Text('Your typed chars appear here:'), sg.Text(size=(15, 1), key='-OUTPUT-')],
+    [sg.Input(key='-IN-'), [sg.Button('Show'), sg.Button('Exit')]]
+]
+
+window = sg.Window('Pattern 2B', layout)
+
+while True:  # Event Loop
+    event, values = window.read()
+    print(event, values)
+    if event == sg.WINDOW_CLOSED or event == 'Exit':
+        break
+    if event == 'Show':
+        # Update the "OUTPUT" text element to be the value of "input" element
+        window['-OUTPUT-'].update(values['-IN-'])
+
+window.close()
+
+
+
+
+import PySimpleGUI as sg
+import os.path
+file_list_column = [
+    [
+        sg.Text("Image Folder"),
+        sg.In(size=(25, 1), enable_events=True, key="-FOLDER-"),
+        sg.FolderBrowse(),
+    ],
+    [
+        sg.Listbox(
+            values=[], enable_events=True, size=(40, 20), key="-FILE LIST-"
+        )
+    ],
+]
+image_viewer_column = [
+    [sg.Text("Choose an image from list on left:")],
+    [sg.Text(size=(40, 1), key="-TOUT-")],
+    [sg.Image(key="-IMAGE-")],
+]
+layout = [
+    [
+        sg.Column(file_list_column),
+        sg.VSeparator(),
+        sg.Column(image_viewer_column),
+    ]
+]
+window = sg.Window("Image Viewer", layout)
+while True:
+    event, values = window.read()
+    if event == "Exit" or event == sg.WIN_CLOSED:
+        break
+    if event == "-FOLDER-":
+        folder = values["-FOLDER-"]
+        try:
+            file_list = os.listdir(folder)
+        except:
+            file_list = []
+        fnames = [
+            f
+            for f in file_list
+            if os.path.isfile(os.path.join(folder, f))
+            and f.lower().endswith((".png", ".gif", ".jpg", ".jpeg"))
+        ]
+        window["-FILE LIST-"].update(fnames)
+    elif event == "-FILE LIST-":  # A file was chosen from the listbox
+        try:
+            filename = os.path.join(
+                values["-FOLDER-"], values["-FILE LIST-"][0]
+            )
+            window["-TOUT-"].update(filename)
+
+            try:
+                window["-IMAGE-"].update(filename=filename)
+            except Exception as e:
+                print(f"Error updating image: {e}")
+        except Exception as e:
+            print(f"Error loading selected file: {e}")
+window.close()
